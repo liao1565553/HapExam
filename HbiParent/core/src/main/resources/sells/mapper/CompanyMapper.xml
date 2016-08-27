@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ~ #{copyright}# -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hbi.core.sells.mapper.CompanyMapper">
+	<resultMap id="BaseResultMap" type="hbi.core.sells.dto.Company">
+		<id column="COMPANY_ID" property="companyId" jdbcType="DECIMAL" />
+		<result column="COMPANY_NUMBER" property="companyNumber"
+			jdbcType="VARCHAR" />
+		<result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+		<result column="ENABLED_FLAG" property="enabledFlag" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		COMPANY_ID,COMPANY_NUMBER,COMPANY_NAME,ENABLED_FLAG
+	</sql>
+	
+	
+	<select id="selectByCompany" resultMap="BaseResultMap">
+		select 
+		COMPANY_ID,COMPANY_NUMBER,COMPANY_NAME,ENABLED_FLAG
+		from hap_org_companys
+		<where>
+			<if test="companyId != null">
+				and COMPANY_ID = #{companyId,jdbcType=DECIMAL}
+			</if>
+			<if test="companyNumber != null">
+				AND COMPANY_NUMBER like concat('%',concat( #{companyNumber,jdbcType=DECIMAL},'%')) 
+			</if>
+			<if test="companyName != null">
+				AND COMPANY_NAME like concat('%',concat(#{companyName,jdbcType=VARCHAR},'%')) 
+			</if>
+		</where>
+	</select>
+
+</mapper>

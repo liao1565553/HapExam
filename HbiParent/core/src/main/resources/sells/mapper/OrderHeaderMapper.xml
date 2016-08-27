@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ~ #{copyright}# -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hbi.core.sells.mapper.OrderHeaderMapper">
+	<resultMap id="BaseResultMap" type="hbi.core.sells.dto.OrderHeader">
+		<id column="HEADER_ID" property="headerId" jdbcType="DECIMAL" />
+		<result column="COMPANY_ID" property="companyId" jdbcType="DECIMAL" />
+		<result column="ORDER_NUMBER" property="orderNumber" jdbcType="DECIMAL" />
+		<result column="CUSTOMER_ID" property="customerId" jdbcType="DECIMAL" />
+		<result column="ORDER_DATE" property="orderDate" jdbcType="DATE" />
+	</resultMap>
+
+	<select id="selectByOrderHeader" parameterType="hbi.core.sells.dto.OrderHeader"
+		resultMap="BaseResultMap">
+		SELECT
+		HEADER_ID,
+		COMPANY_ID,
+		ORDER_NUMBER,
+		COMPANY_ID,
+		ORDER_DATE
+		FROM
+		hap_om_order_headers
+		<where>
+			<if test="headerId != null">
+				and HEADER_ID = #{headerId,jdbcType=DECIMAL}
+			</if>
+			<if test="companyId != null">
+				AND COMPANY_ID like #{companyId,jdbcType=DECIMAL}
+			</if>
+			<if test="orderNumber != null">
+				AND ORDER_NUMBER like
+				#{orderNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="customerId != null">
+				AND CUSTOMER_ID like #{customerId,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByShowOrderMsg" resultType="hbi.core.sells.dto.ShowOrderMsg"
+		parameterType="hbi.core.sells.dto.ShowOrderMsg">
+		SELECT
+		head.ORDER_NUMBER AS orderNumber,
+		head.ORDER_DATE
+		AS orderDate,
+		head.ORDER_STATUS AS orderStatus,
+		(line.ORDERD_QUANTITY*
+		line.UNIT_SELLING_PRICE) AS orderAmount,
+		company.COMPANY_NAME AS
+		companyName,
+		customer.CUSTOMER_NAME AS customerName
+		FROM
+		hap_om_order_headers AS head LEFT JOIN hap_om_order_lines AS line ON
+		head.HEADER_ID=line.HEADER_ID
+		LEFT JOIN hap_org_companys AS company ON
+		head.COMPANY_ID=company.COMPANY_ID
+		LEFT JOIN hap_ar_customers AS
+		customer ON
+		customer.CUSTOMER_ID=head.CUSTOMER_ID;
+	</select>
+
+</mapper>

@@ -1,0 +1,152 @@
+<#include "../include/head.html">
+<body style="padding: 3px; overflow: hidden;">
+	<script src="${base.contextPath}/common/language?var=languageData"
+		type="text/javascript"></script>
+	<form id="d_pmt_002_form"></form>
+	<div id="d_pmt_002_grid" style="margin: 0; padding: 0"></div>
+	<script type="text/javascript">
+		$(function() {
+			window['d_pmt_002_form'] = $("#d_pmt_002_form")
+	           .ligerForm({
+				fields : [{
+					display : '公司名称',
+					name : 'companyNumber',
+					textField : 'companyName',
+					type : "popup",
+					newline : false,
+					options : {
+						type : 'popup',
+						valueField : 'companyNumber',
+						textField : 'companyName',
+						grid : {
+							columns : [
+							{
+								display : '公司编号',
+								name : "companyNumber",
+								align : 'left',
+								width : 200
+							},
+							{
+								display : '公司名称',
+								name : "companyName",
+								align : 'left',
+								width : 200
+							} ],
+							url : '${base.contextPath}/sells/getCompany',
+							height : 350
+						},
+						condition : {
+							inputWidth : 150,
+							labelWidth : 70,
+							fields : [
+							{
+								display : '公司编号',
+								name : "companyNumber",
+								newline : true,
+								type : "text"
+							},
+							{
+								display : '公司名称',
+								name : "companyName",
+								newline : false,
+								type : "text"
+							} ]
+						}
+					}
+				}, {
+					type : 'text',
+					label : '客户名称',
+					name : 'jobGroup',
+					newline : false
+				}, {
+					type : 'text',
+					label : '销售订单',
+					name : 'jobStatus',
+					newline : false
+				}, {
+					type : 'text',
+					label : '公司名称',
+					name : 'jobName'
+				}, {
+					type : 'text',
+					label : '公司名称',
+					name : 'jobName',
+					newline : false
+				} ],
+				buttons : [ {
+					text : '<@spring.message "hap.query"/>',
+					disabled : false,
+					width : 60,
+					click : function() {
+						Hap.gridQuery({
+							form : d_pmt_002_form,
+							grid : d_pmt_002_grid
+						})
+					}
+				} ]
+			});
+
+			window['d_pmt_002_grid'] = $("#d_pmt_002_grid").ligerGrid({
+				unSetValidateAttr : false,
+				columns : [
+			
+				{
+					display : '销售订单号',
+					name : 'orderNumber',
+					align : 'left',
+					width : 150,
+					 editor : {
+                    type: 'text'
+                }
+				}, {
+					display : '公司名称',
+					name : 'companyName',
+					align : 'center',
+					width : 150
+				}, {
+					display : '客户名称',
+					name : 'customerName',
+					align : 'center',
+					width : 150,
+				}, {
+					display : '订单日期',
+					name : 'orderDate',
+					align : 'center',
+					width : 300,
+					type : 'date',
+					format : "yyyy-MM-dd",
+					editor : {
+						type : 'date'
+					}
+				}, {
+					display : '订单状态',
+					name : 'orderStatus',
+					align : 'center',
+					width : 140
+
+				}, {
+					display : '订单金额',
+					name : 'orderAmount',
+					align : 'center',
+					width : 140
+				} ],
+				toolbar : {
+	                items: [{
+	                    text   : '<@spring.message "hap.new"/>',
+	                    disable: false,
+	                    click  : function () {
+	                    	
+	                    },
+	                    icon   : 'add'
+	                }, {
+	                    line: true
+	                },]
+	            },
+				url : '${base.contextPath}/sells/showOrderMsg/query',
+				width : '100%',
+				height : '99%'
+			});
+		});
+	</script>
+</body>
+</html>
