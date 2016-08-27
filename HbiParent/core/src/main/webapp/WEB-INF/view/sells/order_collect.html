@@ -11,7 +11,7 @@
 			window['d_pmt_002_form'] = $("#d_pmt_002_form")
 	           .ligerForm({
 				fields : [{
-					display : '公司名称',
+					display : '<@spring.message "sells.company.name"/>',
 					name : 'companyNumber',
 					textField : 'companyName',
 					type : "popup",
@@ -23,13 +23,13 @@
 						grid : {
 							columns : [
 							{
-								display : '公司编号',
+								display : '<@spring.message "sells.company.number"/>',
 								name : "companyNumber",
 								align : 'left',
 								width : 200
 							},
 							{
-								display : '公司名称',
+								display : '<@spring.message "sells.company.name"/>',
 								name : "companyName",
 								align : 'left',
 								width : 200
@@ -42,13 +42,13 @@
 							labelWidth : 70,
 							fields : [
 							{
-								display : '公司编号',
+								display : '<@spring.message "sells.company.number"/>',
 								name : "companyNumber",
 								newline : true,
 								type : "text"
 							},
 							{
-								display : '公司名称',
+								display : '<@spring.message "sells.company.name"/>',
 								name : "companyName",
 								newline : false,
 								type : "text"
@@ -59,7 +59,7 @@
 				
 				//----------客户名称------------
 				{
-					display : '客户名称',
+					display : '<@spring.message "sells.customer.name"/>',
 					name : 'customerNumber',
 					textField : 'customerName',
 					type : "popup",
@@ -71,13 +71,13 @@
 						grid : {
 							columns : [
 							{
-								display : '客户编号',
+								display : '<@spring.message "sells.customer.number"/>',
 								name : "customerNumber",
 								align : 'left',
 								width : 200
 							},
 							{
-								display : '客户名称',
+								display : '<@spring.message "sells.customer.name"/>',
 								name : "customerName",
 								align : 'left',
 								width : 200
@@ -90,13 +90,13 @@
 							labelWidth : 70,
 							fields : [
 							{
-								display : '客户编号',
+								display : '<@spring.message "sells.customer.number"/>',
 								name : "customerNumber",
 								newline : true,
 								type : "text"
 							},
 							{
-								display : '客户名称',
+								display : '<@spring.message "sells.customer.name"/>',
 								name : "customerName",
 								newline : false,
 								type : "text"
@@ -105,7 +105,7 @@
 					}
 				}, {
 					type : 'text',
-					label : '销售订单',
+					label : '<@spring.message "sells.order.number"/>',
 					name : 'orderNumber',
 					newline : false
 				},
@@ -113,7 +113,7 @@
 				
 				//----------物料------------
 				{
-					display : '物料',
+					display : '<@spring.message "sells.inventory"/>',
 					name : 'inventoryCode',
 					textField : 'inventoryUom',
 					type : "popup",
@@ -125,19 +125,19 @@
 						grid : {
 							columns : [
 							{
-								display : '物料编号',
+								display : '<@spring.message "sells.inventory.number"/>',
 								name : "inventoryCode",
 								align : 'left',
 								width : 200
 							},
 							{
-								display : '物料单位',
+								display : '<@spring.message "sells.inventory.uom"/>',
 								name : "inventoryUom",
 								align : 'left',
 								width : 200
 							},
 							{
-								display : '物料描述',
+								display : '<@spring.message "sells.inventory.description"/>',
 								name : "inventoryDescription",
 								align : 'left',
 								width : 200
@@ -150,12 +150,12 @@
 							labelWidth : 70,
 							fields : [
 							{
-								display : '物料编号',
+								display : '<@spring.message "sells.inventory.number"/>',
 								name : "inventoryCode",
 								newline : true,
 								type : "text"
 							},{
-								display : '物料单位',
+								display : '<@spring.message "sells.inventory.uom"/>',
 								name : "inventoryUom",
 								newline : false,
 								type : "text"
@@ -167,7 +167,7 @@
 				//----------------------订单状态
 				{
 	                type : 'select',
-	                label : '订单状态',
+	                label : '<@spring.message "sells.order.status"/>',
 	                name : 'orderStatus',
 	                newline : false,
 	                options : {
@@ -195,7 +195,7 @@
 	                }
 	            } ,
 				{
-					text : '导出Excel',
+					text : '<@spring.message "sells.export.excel"/>',
 					disabled : false,
 					width : 60,
 					click : function() {
@@ -208,7 +208,7 @@
 				unSetValidateAttr : false,
 				columns : [
 				{
-					display : '销售订单号',
+					display : '<@spring.message "sells.order.number"/>',
 					name : 'orderNumber',
 					align : 'left',
 					width : 150,
@@ -216,17 +216,17 @@
                     type: 'text'
                 }
 				}, {
-					display : '公司名称',
+					display : '<@spring.message "sells.company.name"/>',
 					name : 'companyName',
 					align : 'center',
 					width : 150
 				}, {
-					display : '客户名称',
+					display : '<@spring.message "sells.customer.name"/>',
 					name : 'customerName',
 					align : 'center',
 					width : 150,
 				}, {
-					display : '订单日期',
+					display : '<@spring.message "sells.order.date"/>',
 					name : 'orderDate',
 					align : 'center',
 					width : 300,
@@ -236,13 +236,13 @@
 						type : 'date'
 					}
 				}, {
-					display : '订单状态',
+					display : '<@spring.message "sells.order.status"/>',
 					name : 'orderStatus',
 					align : 'center',
 					width : 140
 
 				}, {
-					display : '订单金额',
+					display : '<@spring.message "sells.order.amount"/>',
 					name : 'orderAmount',
 					align : 'center',
 					width : 140
