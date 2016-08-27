@@ -7,5 +7,5 @@ import com.hand.hap.mybatis.common.Mapper;
 import hbi.core.sells.dto.Company;
 
 public interface CompanyMapper extends Mapper<Company>{
-	public List<Company> selectByCompany(Company company);
+	 List<Company> selectByCompany(Company company);
 }

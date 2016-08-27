@@ -22,6 +22,9 @@ public class OrderHeaderServiceImpl extends BaseServiceImpl<OrderHeader> impleme
 	@Override
 	public List<ShowOrderMsg> selectByShowOrderMsg(IRequest requestContext, ShowOrderMsg showOrderMsg, int page,
 			int pagesize) {
-		return orderHeaderMapper.selectByShowOrderMsg(showOrderMsg);
+		List<ShowOrderMsg> lists=orderHeaderMapper.selectByShowOrderMsg(showOrderMsg);
+		
+		
+		return lists;
 	}
 }

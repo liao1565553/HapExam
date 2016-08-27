@@ -12,24 +12,22 @@ import com.hand.hap.core.IRequest;
 import com.hand.hap.system.controllers.BaseController;
 import com.hand.hap.system.dto.ResponseData;
 
-import hbi.core.sells.dto.OrderHeader;
-import hbi.core.sells.dto.ShowOrderMsg;
-import hbi.core.sells.service.IOrderHeaderService;
+import hbi.core.sells.dto.Inventory;
+import hbi.core.sells.service.IInventoryService;
 
 @Controller
-public class OrderHeaderController extends BaseController{
+public class InventoryController extends BaseController{
 	
 	@Autowired
-	private IOrderHeaderService orderHeaderService;
+	private IInventoryService iInventoryService;
 	
-	@RequestMapping(value = "/sells/showOrderMsg/query")
+	
+	@RequestMapping(value = "/sells/getInventory")
 	@ResponseBody
-	public ResponseData getOrderHeader(ShowOrderMsg showOrderMsg, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
+	public ResponseData getInventory(Inventory Inventory, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
 			@RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int pagesize, HttpServletRequest request) {
 		IRequest requestContext = createRequestContext(request);
-		return new ResponseData(orderHeaderService.selectByShowOrderMsg(requestContext, showOrderMsg, page, pagesize));
+		return new ResponseData(iInventoryService.selectInventory(requestContext,Inventory, page, pagesize));
 	}
-	
-	
 	
 }

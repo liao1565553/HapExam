@@ -12,7 +12,7 @@ import com.hand.hap.system.dto.BaseDTO;
 
 @SuppressWarnings("serial")
 @Table(name = "hap_ar_customers")
-public class Customers extends BaseDTO{
+public class Customer extends BaseDTO{
 	@Id
 	@Column
 	@GeneratedValue
@@ -35,6 +35,7 @@ public class Customers extends BaseDTO{
 	@Column
 	@NotNull
 	private Long companyId;
+	
 
 	/**
 	 * 启用标志

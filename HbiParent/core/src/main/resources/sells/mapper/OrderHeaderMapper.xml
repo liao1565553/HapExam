@@ -23,7 +23,7 @@
 		hap_om_order_headers
 		<where>
 			<if test="headerId != null">
-				and HEADER_ID = #{headerId,jdbcType=DECIMAL}
+				AND HEADER_ID = #{headerId,jdbcType=DECIMAL}
 			</if>
 			<if test="companyId != null">
 				AND COMPANY_ID like #{companyId,jdbcType=DECIMAL}
@@ -42,22 +42,43 @@
 		parameterType="hbi.core.sells.dto.ShowOrderMsg">
 		SELECT
 		head.ORDER_NUMBER AS orderNumber,
-		head.ORDER_DATE
-		AS orderDate,
-		head.ORDER_STATUS AS orderStatus,
+		head.ORDER_DATE AS orderDate,
 		(line.ORDERD_QUANTITY*
 		line.UNIT_SELLING_PRICE) AS orderAmount,
-		company.COMPANY_NAME AS
-		companyName,
-		customer.CUSTOMER_NAME AS customerName
+		company.COMPANY_NAME AS companyName,
+		customer.CUSTOMER_NAME AS customerName,
+		vtl.MEANING AS orderStatus
 		FROM
-		hap_om_order_headers AS head LEFT JOIN hap_om_order_lines AS line ON
-		head.HEADER_ID=line.HEADER_ID
+		hap_om_order_headers AS head
+		LEFT JOIN hap_om_order_lines AS line ON head.HEADER_ID=line.HEADER_ID
 		LEFT JOIN hap_org_companys AS company ON
 		head.COMPANY_ID=company.COMPANY_ID
-		LEFT JOIN hap_ar_customers AS
-		customer ON
-		customer.CUSTOMER_ID=head.CUSTOMER_ID;
+		LEFT JOIN hap_ar_customers AS customer ON
+		customer.CUSTOMER_ID=head.CUSTOMER_ID
+		LEFT JOIN hap_inv_inventory_items AS item ON
+		line.INVENTORY_ITEM_ID=item.INVENTORY_ITEM_ID
+		LEFT JOIN sys_code_value_b AS vb ON head.ORDER_STATUS=vb.CODE_VALUE_ID
+		LEFT JOIN sys_code_value_tl AS vtl ON
+		vb.CODE_VALUE_ID=vtl.CODE_VALUE_ID
+		and vtl.lang =
+		#{request.locale,jdbcType=VARCHAR}
+		<where>
+			<if test="companyName!=null">
+				AND company.COMPANY_NUMBER LIKE
+				#{companyNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="customerName!=null">
+				AND customer.CUSTOMER_NUMBER LIKE
+				#{customerNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="orderNumber!=null">
+				AND head.ORDER_NUMBER LIKE
+				#{orderNumber,jdbcType=VARCHAR}
+			</if>
+			<if test="inventoryCode!=null">
+				AND item.ITEM_CODE like #{inventoryCode,jdbcType=VARCHAR}
+			</if>
+		</where>
 	</select>
 
 </mapper>

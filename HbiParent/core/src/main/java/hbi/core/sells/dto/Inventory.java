@@ -13,32 +13,32 @@ import com.hand.hap.system.dto.BaseDTO;
 @SuppressWarnings("serial")
 
 @Table(name = "hap_inv_inventory_items")
-public class Inventory extends BaseDTO{
+public class Inventory extends BaseDTO {
 	@Id
 	@Column
 	@GeneratedValue
-	private Long inventoryItemsId;
+	private Long inventoryId;
 
 	/**
-	 * 物料编码
+	 * 物料编码 ITEM_CODE
 	 */
 	@Column
 	@NotEmpty
-	private String itemCode;
+	private String inventoryCode;
 
 	/**
-	 * 物料单位
+	 * 物料单位 ITEM_UOM
 	 */
 	@Column
 	@NotEmpty
-	private String itemUom;
+	private String inventoryUom;
 
 	/**
 	 * 物料描述 ITEM_DESCRIPTION
 	 */
 	@Column
 	@NotNull
-	private Long itemDescription;
+	private String inventoryDescription;
 
 	/**
 	 * 是否能用于销售 ORDER_FLAG
@@ -52,36 +52,36 @@ public class Inventory extends BaseDTO{
 	@Column
 	private String enabledFlag;
 
-	public Long getInventoryItemsId() {
-		return inventoryItemsId;
+	public Long getInventoryId() {
+		return inventoryId;
 	}
 
-	public void setInventoryItemsId(Long inventoryItemsId) {
-		this.inventoryItemsId = inventoryItemsId;
+	public void setInventoryId(Long inventoryId) {
+		this.inventoryId = inventoryId;
 	}
 
-	public String getItemCode() {
-		return itemCode;
+	public String getInventoryCode() {
+		return inventoryCode;
 	}
 
-	public void setItemCode(String itemCode) {
-		this.itemCode = itemCode;
+	public void setInventoryCode(String inventoryCode) {
+		this.inventoryCode = inventoryCode;
 	}
 
-	public String getItemUom() {
-		return itemUom;
+	public String getInventoryUom() {
+		return inventoryUom;
 	}
 
-	public void setItemUom(String itemUom) {
-		this.itemUom = itemUom;
+	public void setInventoryUom(String inventoryUom) {
+		this.inventoryUom = inventoryUom;
 	}
 
-	public Long getItemDescription() {
-		return itemDescription;
+	public String getInventoryDescription() {
+		return inventoryDescription;
 	}
 
-	public void setItemDescription(Long itemDescription) {
-		this.itemDescription = itemDescription;
+	public void setInventoryDescription(String inventoryDescription) {
+		this.inventoryDescription = inventoryDescription;
 	}
 
 	public String getOrderFlag() {
@@ -99,6 +99,5 @@ public class Inventory extends BaseDTO{
 	public void setEnabledFlag(String enabledFlag) {
 		this.enabledFlag = enabledFlag;
 	}
-	
-	
+
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ~ #{copyright}# -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hbi.core.sells.mapper.CustomerMapper">
+
+	<sql id="Base_Column_List">
+
+	</sql>
+
+
+	<select id="selectByCustomer" resultType="hbi.core.sells.dto.Customer"
+		parameterType="hbi.core.sells.dto.Customer">
+		SELECT
+		CUSTOMER_NUMBER AS customerNumber,
+		CUSTOMER_NAME AS customerName
+		FROM
+		hap_ar_customers AS customer
+		LEFT JOIN
+		hap_org_companys AS company
+		ON customer.COMPANY_ID=company.COMPANY_ID
+		<where>
+			<if test="companyId != null">
+				and customer.COMPANY_ID = #{companyId,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+
+</mapper>

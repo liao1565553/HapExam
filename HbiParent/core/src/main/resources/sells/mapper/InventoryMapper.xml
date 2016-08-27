@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ~ #{copyright}# -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hbi.core.sells.mapper.InventoryMapper">
+
+	<select id="selectByInventory" resultType="hbi.core.sells.dto.Inventory"
+		parameterType="hbi.core.sells.dto.Inventory">
+		SELECT
+		ITEM_CODE AS inventoryCode,
+		ITEM_UOM AS inventoryUom,
+		ITEM_DESCRIPTION AS inventoryDescription
+		FROM hap_inv_inventory_items
+	</select>
+
+</mapper>

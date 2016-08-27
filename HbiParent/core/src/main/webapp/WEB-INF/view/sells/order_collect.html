@@ -53,26 +53,128 @@
 							} ]
 						}
 					}
-				}, {
-					type : 'text',
-					label : '客户名称',
-					name : 'jobGroup',
-					newline : false
+				}, 
+				
+				//----------客户名称------------
+				{
+					display : '客户名称',
+					name : 'customerNumber',
+					textField : 'customerName',
+					type : "popup",
+					newline : false,
+					options : {
+						type : 'popup',
+						valueField : 'customerNumber',
+						textField : 'customerName',
+						grid : {
+							columns : [
+							{
+								display : '客户编号',
+								name : "customerNumber",
+								align : 'left',
+								width : 200
+							},
+							{
+								display : '客户名称',
+								name : "customerName",
+								align : 'left',
+								width : 200
+							} ],
+							url : '${base.contextPath}/sells/getCustomer',
+							height : 350
+						},
+						condition : {
+							inputWidth : 150,
+							labelWidth : 70,
+							fields : [
+							{
+								display : '客户编号',
+								name : "customerNumber",
+								newline : true,
+								type : "text"
+							},
+							{
+								display : '客户名称',
+								name : "customerName",
+								newline : false,
+								type : "text"
+							} ]
+						}
+					}
 				}, {
 					type : 'text',
 					label : '销售订单',
-					name : 'jobStatus',
+					name : 'orderNumber',
 					newline : false
-				}, {
-					type : 'text',
-					label : '公司名称',
-					name : 'jobName'
-				}, {
-					type : 'text',
-					label : '公司名称',
-					name : 'jobName',
-					newline : false
-				} ],
+				},
+				
+				
+				//----------物料------------
+				{
+					display : '物料',
+					name : 'inventoryCode',
+					textField : 'inventoryUom',
+					type : "popup",
+					newline : false,
+					options : {
+						type : 'popup',
+						valueField : 'inventoryCode',
+						textField : 'inventoryCode',
+						grid : {
+							columns : [
+							{
+								display : '物料编号',
+								name : "inventoryCode",
+								align : 'left',
+								width : 200
+							},
+							{
+								display : '物料单位',
+								name : "inventoryUom",
+								align : 'left',
+								width : 200
+							},
+							{
+								display : '物料描述',
+								name : "inventoryDescription",
+								align : 'left',
+								width : 200
+							}],
+							url : '${base.contextPath}/sells/getInventory',
+							height : 350
+						},
+						condition : {
+							inputWidth : 150,
+							labelWidth : 70,
+							fields : [
+							{
+								display : '物料编号',
+								name : "inventoryCode",
+								newline : true,
+								type : "text"
+							},{
+								display : '物料单位',
+								name : "inventoryUom",
+								newline : false,
+								type : "text"
+							} ]
+						}
+					}
+				},
+				
+				//订单状态
+				{
+	                type : 'select',
+	                label : '订单状态',
+	                name : 'lang',
+	                newline : false,
+	                options : {
+	                    valueFieldID : "customerId",
+	                    valueField : "langCode",
+	                    textField : "description",
+	                    data : languageData
+	                }
+	            }],
 				buttons : [ {
 					text : '<@spring.message "hap.query"/>',
 					disabled : false,
@@ -83,13 +185,27 @@
 							grid : d_pmt_002_grid
 						})
 					}
+				},{
+	                text    : '<@spring.message "hap.reset"/>',
+	                disabled: false,
+	                width   : 60,
+	                click   : function () {
+	                	d_pmt_002_form.reset();
+	                }
+	            } ,
+				{
+					text : '导出Excel',
+					disabled : false,
+					width : 60,
+					click : function() {
+					
+					}
 				} ]
 			});
 
 			window['d_pmt_002_grid'] = $("#d_pmt_002_grid").ligerGrid({
 				unSetValidateAttr : false,
 				columns : [
-			
 				{
 					display : '销售订单号',
 					name : 'orderNumber',
@@ -135,7 +251,6 @@
 	                    text   : '<@spring.message "hap.new"/>',
 	                    disable: false,
 	                    click  : function () {
-	                    	
 	                    },
 	                    icon   : 'add'
 	                }, {

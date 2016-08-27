@@ -12,24 +12,21 @@ import com.hand.hap.core.IRequest;
 import com.hand.hap.system.controllers.BaseController;
 import com.hand.hap.system.dto.ResponseData;
 
-import hbi.core.sells.dto.OrderHeader;
-import hbi.core.sells.dto.ShowOrderMsg;
-import hbi.core.sells.service.IOrderHeaderService;
+import hbi.core.sells.dto.Customer;
+import hbi.core.sells.service.ICustomerService;
 
 @Controller
-public class OrderHeaderController extends BaseController{
-	
+public class CustomerController extends BaseController{
+
 	@Autowired
-	private IOrderHeaderService orderHeaderService;
+	private ICustomerService customerService;
 	
-	@RequestMapping(value = "/sells/showOrderMsg/query")
+	@RequestMapping(value = "/sells/getCustomer")
 	@ResponseBody
-	public ResponseData getOrderHeader(ShowOrderMsg showOrderMsg, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
-			@RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int pagesize, HttpServletRequest request) {
+	public ResponseData getCustomer(Customer customer, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
+			@RequestParam(defaultValue = DEFAULT_PAGE_SIZE) int pagesize, HttpServletRequest request){
 		IRequest requestContext = createRequestContext(request);
-		return new ResponseData(orderHeaderService.selectByShowOrderMsg(requestContext, showOrderMsg, page, pagesize));
+		return new ResponseData(customerService.selectByCustomer(requestContext,customer, page, pagesize));
 	}
-	
-	
 	
 }
