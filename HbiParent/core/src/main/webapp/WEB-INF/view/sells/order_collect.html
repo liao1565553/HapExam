@@ -5,6 +5,8 @@
 	<form id="d_pmt_002_form"></form>
 	<div id="d_pmt_002_grid" style="margin: 0; padding: 0"></div>
 	<script type="text/javascript">
+		
+	
 		$(function() {
 			window['d_pmt_002_form'] = $("#d_pmt_002_form")
 	           .ligerForm({
@@ -162,17 +164,16 @@
 					}
 				},
 				
-				//订单状态
+				//----------------------订单状态
 				{
 	                type : 'select',
 	                label : '订单状态',
-	                name : 'lang',
+	                name : 'orderStatus',
 	                newline : false,
 	                options : {
-	                    valueFieldID : "customerId",
-	                    valueField : "langCode",
-	                    textField : "description",
-	                    data : languageData
+	                    url:'${base.contextPath}/sells/getOrderData',
+	                    valueField : "orderValue",
+	                    textField : "orderMeaning",
 	                }
 	            }],
 				buttons : [ {
@@ -262,6 +263,7 @@
 				height : '99%'
 			});
 		});
+		
 	</script>
 </body>
 </html>

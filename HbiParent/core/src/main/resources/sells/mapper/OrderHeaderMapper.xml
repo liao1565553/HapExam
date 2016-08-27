@@ -46,21 +46,29 @@
 		(line.ORDERD_QUANTITY*
 		line.UNIT_SELLING_PRICE) AS orderAmount,
 		company.COMPANY_NAME AS companyName,
-		customer.CUSTOMER_NAME AS customerName,
+		customer.CUSTOMER_NAME AS
+		customerName,
 		vtl.MEANING AS orderStatus
 		FROM
-		hap_om_order_headers AS head
-		LEFT JOIN hap_om_order_lines AS line ON head.HEADER_ID=line.HEADER_ID
+		hap_om_order_headers AS
+		head
+		LEFT JOIN hap_om_order_lines AS line ON
+		head.HEADER_ID=line.HEADER_ID
 		LEFT JOIN hap_org_companys AS company ON
 		head.COMPANY_ID=company.COMPANY_ID
-		LEFT JOIN hap_ar_customers AS customer ON
+		LEFT JOIN hap_ar_customers AS
+		customer ON
 		customer.CUSTOMER_ID=head.CUSTOMER_ID
-		LEFT JOIN hap_inv_inventory_items AS item ON
+		LEFT JOIN
+		hap_inv_inventory_items AS item ON
 		line.INVENTORY_ITEM_ID=item.INVENTORY_ITEM_ID
-		LEFT JOIN sys_code_value_b AS vb ON head.ORDER_STATUS=vb.CODE_VALUE_ID
-		LEFT JOIN sys_code_value_tl AS vtl ON
+		LEFT JOIN
+		sys_code_value_b AS vb ON head.ORDER_STATUS=vb.value
+		LEFT JOIN
+		sys_code_value_tl AS vtl ON
 		vb.CODE_VALUE_ID=vtl.CODE_VALUE_ID
-		and vtl.lang =
+		and
+		vtl.lang =
 		#{request.locale,jdbcType=VARCHAR}
 		<where>
 			<if test="companyName!=null">
@@ -78,7 +86,24 @@
 			<if test="inventoryCode!=null">
 				AND item.ITEM_CODE like #{inventoryCode,jdbcType=VARCHAR}
 			</if>
+			<if test="orderStatus!=null">
+				AND head.order_status=#{orderStatus,jdbcType=VARCHAR}
+			</if>
 		</where>
+	</select>
+
+	<select id="selectOrderStatus" resultType="hbi.core.sells.dto.OrderStatusData">
+		SELECT vb.value as orderValue,
+		vtl.meaning as orderMeaning
+		FROM sys_code_value_b AS vb
+		LEFT JOIN sys_code_value_tl AS vtl
+		ON
+		vb.code_value_id=vtl.code_value_id
+		LEFT JOIN sys_code_b AS cb ON vb.code_id=cb.code_id
+		WHERE cb.code='HAP_OM_ORDER_STATUS'
+		and 
+		vtl.lang =
+		#{request.locale,jdbcType=VARCHAR}
 	</select>
 
 </mapper>

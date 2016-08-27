@@ -47,11 +47,6 @@ public class ShowOrderMsg extends BaseDTO {
 	private String orderStatus;
 
 	/**
-	 * 订单状态集合
-	 */
-	private List<String> orderStatusData;
-
-	/**
 	 * 订单金额
 	 */
 	private Integer orderAmount;
@@ -67,14 +62,6 @@ public class ShowOrderMsg extends BaseDTO {
 	 * @return
 	 */
 	private String inventoryUom;
-
-	public List<String> getOrderStatusData() {
-		return orderStatusData;
-	}
-
-	public void setOrderStatusData(List<String> orderStatusData) {
-		this.orderStatusData = orderStatusData;
-	}
 
 	public Long getCompanyId() {
 		return companyId;

@@ -9,6 +9,7 @@ import com.hand.hap.core.IRequest;
 import com.hand.hap.system.service.impl.BaseServiceImpl;
 
 import hbi.core.sells.dto.OrderHeader;
+import hbi.core.sells.dto.OrderStatusData;
 import hbi.core.sells.dto.ShowOrderMsg;
 import hbi.core.sells.mapper.OrderHeaderMapper;
 import hbi.core.sells.service.IOrderHeaderService;
@@ -22,9 +23,11 @@ public class OrderHeaderServiceImpl extends BaseServiceImpl<OrderHeader> impleme
 	@Override
 	public List<ShowOrderMsg> selectByShowOrderMsg(IRequest requestContext, ShowOrderMsg showOrderMsg, int page,
 			int pagesize) {
-		List<ShowOrderMsg> lists=orderHeaderMapper.selectByShowOrderMsg(showOrderMsg);
-		
-		
-		return lists;
+		return orderHeaderMapper.selectByShowOrderMsg(showOrderMsg);
+	}
+
+	@Override
+	public List<OrderStatusData> selectOrderStatus(IRequest requestContext) {
+		return orderHeaderMapper.selectOrderStatus();
 	}
 }

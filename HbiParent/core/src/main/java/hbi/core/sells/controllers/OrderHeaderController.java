@@ -12,7 +12,6 @@ import com.hand.hap.core.IRequest;
 import com.hand.hap.system.controllers.BaseController;
 import com.hand.hap.system.dto.ResponseData;
 
-import hbi.core.sells.dto.OrderHeader;
 import hbi.core.sells.dto.ShowOrderMsg;
 import hbi.core.sells.service.IOrderHeaderService;
 
@@ -30,6 +29,11 @@ public class OrderHeaderController extends BaseController{
 		return new ResponseData(orderHeaderService.selectByShowOrderMsg(requestContext, showOrderMsg, page, pagesize));
 	}
 	
-	
+	@RequestMapping(value="/sells/getOrderData")
+	@ResponseBody
+	public ResponseData getOrderStatusData(HttpServletRequest request){
+		IRequest requestContext = createRequestContext(request);
+		return new ResponseData(orderHeaderService.selectOrderStatus(requestContext));
+	}
 	
 }
