@@ -43,7 +43,7 @@
 		SELECT
 		head.ORDER_NUMBER AS orderNumber,
 		head.ORDER_DATE AS orderDate,
-		(line.ORDERD_QUANTITY*
+		SUM(line.ORDERD_QUANTITY*
 		line.UNIT_SELLING_PRICE) AS orderAmount,
 		company.COMPANY_NAME AS companyName,
 		customer.CUSTOMER_NAME AS
@@ -90,6 +90,7 @@
 				AND head.order_status=#{orderStatus,jdbcType=VARCHAR}
 			</if>
 		</where>
+		GROUP BY line.header_id
 	</select>
 
 	<select id="selectOrderStatus" resultType="hbi.core.sells.dto.OrderStatusData">
